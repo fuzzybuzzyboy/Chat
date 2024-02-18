@@ -17,11 +17,14 @@ def handle_client(client_socket, client_address):
         while True:
             message = client_socket.recv(1024).decode('utf-8')
             if not message: break
-            for recipient_address, recipient_socket in clients.items():
-                if recipient_socket != client_socket:
-                    recipient_socket.sendall(message.encode('utf-8'))
-            print(f"Person {list(clients.keys()).index(client_address) + 1}: {message}")
-    except Exception as e: print(f"Error handling client (Crash or forcibly closed) {client_address}: {e}")
+            if message.lower() == '!clear': print(f"Person {list(clients.keys()).index(client_address) + 1} has cleared their chat.")
+            else:
+                for recipient_address, recipient_socket in clients.items():
+                    if recipient_socket != client_socket:
+                        recipient_socket.sendall(f'Person {list(clients.keys()).index(client_address) + 1} - {message}'.encode('utf-8'))
+                print(f"Person {list(clients.keys()).index(client_address) + 1}: {message}")
+    except Exception as e:
+        print(f"Error handling client (Crash or forcibly closed) {client_address}: {e}")
     print(f"User disconnected. ({client_address})")
     del clients[client_address]
     client_socket.close()
