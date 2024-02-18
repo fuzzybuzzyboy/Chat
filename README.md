@@ -1,3 +1,6 @@
+> [!NOTE]
+> The actual files are in the folder called 'code'.
+
 # Multiperson Chat Application
 
 This is a simple multiplayer chat application built in Python using sockets and treading (Check if you have both before running the code 💀). It allows multiple clients to connect to a server and send messages to each other.
