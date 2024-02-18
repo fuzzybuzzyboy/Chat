@@ -17,3 +17,11 @@ This is a simple multiplayer chat application built in Python using sockets and 
 - 1 Install the files.
 - 2 Run the server.
 - 3 Run both clients..
+
+## Help
+
+- Prefix is !
+- Current commands are:
+```
+!clear - Clears the chat (all messages)
+```
