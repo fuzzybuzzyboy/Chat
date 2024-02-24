@@ -23,5 +23,7 @@ This is a simple multiplayer chat application built in Python using sockets and 
 - Prefix is !
 - Current commands are:
 ```
-!clear - Clears the chat (all messages)
+!clear - Clears the chat (Client side)
+!exit - disconnects from the chat
+!onlineusers - Sends a message to the client with the amount of users online
 ```
