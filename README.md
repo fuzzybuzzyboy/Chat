@@ -23,4 +23,7 @@ This is a simple multiperson chat application built in Python using sockets and 
 !clear - Clears the chat (Client side)
 !exit - disconnects from the chat
 !onlineusers - Sends a message to the client with the amount of users online
+!PM (Private message for short)︱Example: !PM [Client ID] [Your message]
+!commandcount (or !cc) - Tells you how many commands you've ran
+!messagecount (or !mc) - Tells you how many messages you've sent
 ```
