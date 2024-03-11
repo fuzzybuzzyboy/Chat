@@ -10,7 +10,7 @@ def send_private_message(username, recipient_id, message, sender, sender_id):
     print([id for _, id in client_usernames.values()])
     for client_address, (client_socket, _, client_id) in clients_pm.items():
         if client_id == recipient_id and client_id != client_pm_check.get(sender):
-            print(f'{username} (Client {sender_id}), (Private message): is sending a message to client {recipient_id}')
+            f.write(f'\n{username} (Client {list(clients.keys()).index(client_address) + 1}), (Private message): sending to client {recipient_id}'), print(f'{username} (Client {sender_id}), (Private message): is sending a message to client {recipient_id}')
             try: client_socket.sendall(f'{username} (Client {sender_id}), (Private message): {message}'.encode('utf-8')), sender.sendall(f'Message sent to client {recipient_id} sucsessfully.'.encode('utf-8'))
             except Exception as e: print(f"Error sending private message to {recipient_id}: {e}")
             else: break
@@ -43,7 +43,6 @@ def handle_client(client_socket, client_address):
                 if len(message.split(' ', 3)) == 4: parts = message.split(' ', 2)
                 elif len(message.split(' ', 3)) == 3: parts = message.split(' ', 3)
                 send_private_message(username, parts[1], ' '.join(parts[2:]), client_socket, list(clients.keys()).index(client_address) + 1)
-                f.write(f'\n{username} (Client {list(clients.keys()).index(client_address) + 1}), (Private message): sending to client {parts[1]}')
             elif not message:
                 print(f"Something went wrong with handeling {username} (client {list(clients.keys()).index(client_address)}).")
                 break
