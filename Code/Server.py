@@ -1,20 +1,17 @@
 import socket, threading, os
 HOST, PORT = '127.0.0.1', 5050
-server_socket, clients, client_usernames, clients_pm, client_pm_check, client_id_counter = socket.socket(socket.AF_INET, socket.SOCK_STREAM), {}, {}, {}, {}, 0
+server_socket, clients, client_usernames, clients_pm, client_pm_check, client_id_counter, File_Path = socket.socket(socket.AF_INET, socket.SOCK_STREAM), {}, {}, {}, {}, 0, os.path.join("Chat logs", "logs.txt")
 server_socket.bind((HOST, PORT)), server_socket.listen()
-Folder_Path = "Chat logs"
-File_Path = os.path.join(Folder_Path, "logs.txt")
 f = open(f"{File_Path}", "wt")
 print(f'Messages are getting logged into a file (chat logs -> logs)\nServer is online and listening. (Running on port: {PORT}, Running on host: {HOST})\nThe ID of the clients is listed by oldest -> newest')
 def send_private_message(username, recipient_id, message, sender, sender_id):
-    print([id for _, id in client_usernames.values()])
     for client_address, (client_socket, _, client_id) in clients_pm.items():
         if client_id == recipient_id and client_id != client_pm_check.get(sender):
             f.write(f'\n{username} (Client {list(clients.keys()).index(client_address) + 1}), (Private message): sending to client {recipient_id}'), print(f'{username} (Client {sender_id}), (Private message): is sending a message to client {recipient_id}')
             try: client_socket.sendall(f'{username} (Client {sender_id}), (Private message): {message}'.encode('utf-8')), sender.sendall(f'Message sent to client {recipient_id} sucsessfully.'.encode('utf-8'))
             except Exception as e: print(f"Error sending private message to {recipient_id}: {e}")
             else: break
-        elif client_id == recipient_id and client_id == client_pm_check.get(sender): client_socket.sendall('You cannot private messages yourself.'.encode('utf-8'))
+        elif client_id == recipient_id and client_id == client_pm_check.get(sender): client_socket.sendall('You cannot send yourself messages.'.encode('utf-8'))
         elif recipient_id not in [id for _, id in client_usernames.values()]:
             sender.sendall(f'Failed to send private message to client {recipient_id}. (R: Client doesn\'t exist.)'.encode('utf-8'))
             break
