@@ -10,7 +10,8 @@ def username_creation():
 username = username_creation()
 
 client_socket, messages_sent, command_count = socket.socket(socket.AF_INET, socket.SOCK_STREAM), 0, 0
-client_socket.connect(('127.0.0.1', 5050)), print(Style.BRIGHT + Fore.GREEN + 'Your messages are getting logged.\nConnected with success. Prefix is \'!\'. Client IDS go from oldest -> newest\n' + Fore.BLUE + Style.NORMAL+'!clear - Clears the chat (Client side)\n!exit - Exits the client (works better than ctrl+c for some reason)\n!onlineusers - Tells you how many connected clients are online\n!PM (Private message for short)︱Example: !PM [Client ID] [Your message]\n!messagecount (Or !mc) - Tells you how many messages you\'ve sent\n!commandcount (Or !cc) - Tells you how many commands you\'ve ran\n' + Fore.WHITE, Style.RESET_ALL)
+try: client_socket.connect(('127.0.0.1', 5050)), print(Style.BRIGHT + Fore.GREEN + 'Your messages are getting logged.\nConnected with success. Prefix is \'!\'. Client IDS go from oldest -> newest\n' + Fore.BLUE + Style.NORMAL+'!clear - Clears the chat (Client side)\n!exit - Exits the client (works better than ctrl+c for some reason)\n!onlineusers - Tells you how many connected clients are online\n!PM (Private message for short)︱Example: !PM [Client ID] [Your message]\n!messagecount (Or !mc) - Tells you how many messages you\'ve sent\n!commandcount (Or !cc) - Tells you how many commands you\'ve ran\n' + Fore.WHITE, Style.RESET_ALL)
+except ConnectionRefusedError: exit('Failed to connect to server. Please make sure the server is running')
 def send_message():
     global messages_sent, command_count
     while True:
