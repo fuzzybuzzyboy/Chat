@@ -31,3 +31,8 @@ This is a simple multiperson chat application built in Python using sockets and 
 !commandcount (or !cc) - Tells you how many commands you've ran
 !messagecount (or !mc) - Tells you how many messages you've sent
 ```
+
+## New features
+
+- probably some username/password login+sign-up [working on this]
+- probably gonna add encryption to the username/password system for the fun of it [working on this]
